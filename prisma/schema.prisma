@@ -47,16 +47,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-}
-
 model VerificationToken {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
@@ -64,4 +54,68 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  // Relations
+  accounts              Account[]
+  sessions              Session[]
+  createdProposals      Proposal[]
+  createdGroups         Group[]
+  createdResources      Resource[] @relation("created")
+  accessibleResources   Resource[] @relation("accessible", fields: [accessibleResourceIds], references: [id])
+  accessibleResourceIds String[]   @db.ObjectId
+
+  // Properties
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+}
+
+model Group {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  // Relations
+  resources   Resource[] @relation(fields: [resourceIds], references: [id])
+  resourceIds String[]   @db.ObjectId
+  creator     User       @relation(fields: [creatorId], references: [id])
+  creatorId   String     @db.ObjectId
+
+  // Properties
+  name        String
+  description String?
+  userId      String? @db.ObjectId
+}
+
+model Resource {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  // Relations
+  proposals Proposal[]
+  groups    Group[]    @relation(fields: [groupIds], references: [id])
+  groupIds  String[]   @db.ObjectId
+  owner     User       @relation("created", fields: [ownerId], references: [id])
+  ownerId   String     @db.ObjectId
+  users     User[]     @relation("accessible", fields: [userIds], references: [id])
+  userIds   String[]   @db.ObjectId
+
+  // Properties
+  name        String
+  description String?
+}
+
+model Proposal {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  // Relations
+  owner      User      @relation(fields: [ownerId], references: [id])
+  ownerId    String    @db.ObjectId
+  Resource   Resource? @relation(fields: [resourceId], references: [id])
+  resourceId String?   @db.ObjectId
+
+  // Properties
+  createdAt DateTime
 }
