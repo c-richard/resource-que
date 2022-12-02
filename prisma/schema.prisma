@@ -96,11 +96,11 @@ model Resource {
   // Relations
   proposals Proposal[]
   groups    Group[]    @relation(fields: [groupIds], references: [id])
-  groupIds  String[]   @db.ObjectId
+  groupIds  String[]   @default([]) @db.ObjectId
   owner     User       @relation("created", fields: [ownerId], references: [id])
   ownerId   String     @db.ObjectId
   users     User[]     @relation("accessible", fields: [userIds], references: [id])
-  userIds   String[]   @db.ObjectId
+  userIds   String[]   @default([]) @db.ObjectId
 
   // Properties
   name        String
