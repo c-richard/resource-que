@@ -111,10 +111,10 @@ model Proposal {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
   // Relations
-  owner      User      @relation(fields: [ownerId], references: [id])
-  ownerId    String    @db.ObjectId
-  Resource   Resource? @relation(fields: [resourceId], references: [id])
-  resourceId String?   @db.ObjectId
+  owner      User     @relation(fields: [ownerId], references: [id])
+  ownerId    String   @db.ObjectId
+  Resource   Resource @relation(fields: [resourceId], references: [id])
+  resourceId String   @db.ObjectId
 
   // Properties
   createdAt DateTime

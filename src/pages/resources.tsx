@@ -5,7 +5,7 @@ import { Layout } from "../components/Layout";
 import { trpc } from "../utils/trpc";
 import { useSession } from "next-auth/react";
 import { Button } from "../components/Button";
-import { Resource } from "../components/Resource";
+import { ResourceSummary } from "../components/ResourceSummary";
 import { AuthGuard } from "../components/AuthGuard";
 
 const Resources: NextPage = () => {
@@ -24,7 +24,7 @@ const Resources: NextPage = () => {
         {resources && resources.length > 0 && (
           <ul>
             {resources.map((r) => (
-              <Resource key={r.id} {...r} />
+              <ResourceSummary key={r.id} {...r} />
             ))}
           </ul>
         )}

@@ -1,15 +1,15 @@
+import React from "react";
+import { useForm } from "react-hook-form";
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { Layout } from "../../components/Layout";
-import { trpc } from "../../utils/trpc";
-import { Button } from "../../components/Button";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Input } from "../../components/Input";
-import { AuthGuard } from "../../components/AuthGuard";
-import { useSession } from "next-auth/react";
+
+import { Layout } from "../../../components/Layout";
+import { trpc } from "../../../utils/trpc";
+import { Button } from "../../../components/Button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "../../../components/Input";
+import { AuthGuard } from "../../../components/AuthGuard";
 
 const createResourceSchema = z.object({
   name: z.string().min(1, { message: "Required" }),
@@ -19,7 +19,6 @@ const createResourceSchema = z.object({
 const ResourceEdit: NextPage = () => {
   const router = useRouter();
   const utils = trpc.useContext();
-  const { data: sessionData } = useSession();
   const { id } = router.query;
 
   const {
@@ -35,7 +34,7 @@ const ResourceEdit: NextPage = () => {
     onSuccess: () => {
       utils.resource.getByUserId.invalidate();
       utils.resource.getById.invalidate();
-      router.push("/resources");
+      router.push(`/resource/${resource?.id}`);
     },
   });
 
