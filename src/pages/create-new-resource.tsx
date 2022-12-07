@@ -23,10 +23,8 @@ const CreateNewResource: NextPage = () => {
   const userId = sessionData?.user?.id;
 
   const createResource = trpc.resource.create.useMutation({
-    onSettled: () => {
+    onSuccess: () => {
       utils.resource.getByUserId.invalidate();
-    },
-    onMutate: () => {
       router.push("/resources");
     },
   });

@@ -9,7 +9,7 @@ import {
 interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
   name: string;
   error?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<any>;
 }
 
 export const Input = ({ name, error, register, ...props }: InputProps) => {
