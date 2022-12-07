@@ -55,17 +55,6 @@ const ResourceEdit: NextPage = () => {
     });
   }
 
-  useEffect(() => {
-    if (
-      resource &&
-      sessionData?.user &&
-      resource.ownerId &&
-      resource.id !== sessionData.user.id
-    ) {
-      router.push(`/resources`);
-    }
-  });
-
   return (
     <AuthGuard>
       <Layout title="Edit">

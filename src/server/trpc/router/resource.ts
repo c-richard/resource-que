@@ -23,6 +23,11 @@ export const resourceRouter = router({
       data: input.resource,
     })
   ),
+  delete: protectedProcedure.input(z.string()).mutation(({ ctx, input }) =>
+    ctx.prisma.resource.delete({
+      where: { id: input },
+    })
+  ),
   getByUserId: protectedProcedure
     .input(z.string())
     .query(({ ctx, input }) =>
