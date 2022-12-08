@@ -7,6 +7,7 @@ import { trpc } from "../../../utils/trpc";
 import { Button } from "../../../components/Button";
 import { AuthGuard } from "../../../components/AuthGuard";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const ResourceDetailed: NextPage = () => {
   const router = useRouter();
@@ -37,44 +38,8 @@ const ResourceDetailed: NextPage = () => {
 
   return (
     <AuthGuard>
-      <Layout title="Edit">
-        <h1>Resource</h1>
-        <p>{resource?.name}</p>
-        <p>{resource?.description}</p>
-        {resource?.proposals && (
-          <ul>
-            {resource.proposals.map((p) => (
-              <li>{p.owner.name}</li>
-            ))}
-          </ul>
-        )}
-        {resource && sessionData?.user && (
-          <>
-            {resource?.proposals
-              .map((p) => p.ownerId)
-              .includes(sessionData?.user?.id) ? (
-              <Button onClick={() => unRequestAccess.mutate(resource.id)}>
-                Remove Request
-              </Button>
-            ) : (
-              <Button onClick={() => requestAccess.mutate(resource.id)}>
-                Request
-              </Button>
-            )}
-            {resource.ownerId === sessionData?.user?.id && (
-              <>
-                <Button
-                  onClick={() => router.push(`/resource/${resource.id}/edit`)}
-                >
-                  Edit
-                </Button>
-                <Button onClick={() => deleteResource.mutate(resource.id)}>
-                  Delete
-                </Button>
-              </>
-            )}
-          </>
-        )}
+      <Layout title="Create Proposal">
+        <h1>Create Proposal</h1>
       </Layout>
     </AuthGuard>
   );

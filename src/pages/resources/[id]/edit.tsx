@@ -34,7 +34,7 @@ const ResourceEdit: NextPage = () => {
     onSuccess: () => {
       utils.resource.getByUserId.invalidate();
       utils.resource.getById.invalidate();
-      router.push(`/resource/${resource?.id}`);
+      router.push(`/resources/${resource?.id}`);
     },
   });
 

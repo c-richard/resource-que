@@ -1,15 +1,15 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { Layout } from "../components/Layout";
-import { trpc } from "../utils/trpc";
+import { Layout } from "../../components/Layout";
+import { trpc } from "../../utils/trpc";
 import { useSession } from "next-auth/react";
-import { Button } from "../components/Button";
+import { Button } from "../../components/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Input } from "../components/Input";
-import { AuthGuard } from "../components/AuthGuard";
+import { Input } from "../../components/Input";
+import { AuthGuard } from "../../components/AuthGuard";
 
 const createResourceSchema = z.object({
   name: z.string().min(1, { message: "Required" }),

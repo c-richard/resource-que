@@ -1,12 +1,12 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { Layout } from "../components/Layout";
-import { trpc } from "../utils/trpc";
+import { Layout } from "../../components/Layout";
+import { trpc } from "../../utils/trpc";
 import { useSession } from "next-auth/react";
-import { Button } from "../components/Button";
-import { ResourceSummary } from "../components/ResourceSummary";
-import { AuthGuard } from "../components/AuthGuard";
+import { ResourceSummary } from "../../components/ResourceSummary";
+import { AuthGuard } from "../../components/AuthGuard";
+import Link from "next/link";
 
 const Resources: NextPage = () => {
   const router = useRouter();
@@ -28,9 +28,7 @@ const Resources: NextPage = () => {
             ))}
           </ul>
         )}
-        <Button onClick={() => router.push("/create-new-resource")}>
-          Create +
-        </Button>
+        <Link href="/resources/create">Create +</Link>
       </Layout>
     </AuthGuard>
   );
