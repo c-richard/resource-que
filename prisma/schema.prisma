@@ -117,5 +117,6 @@ model Proposal {
   resourceId String   @db.ObjectId
 
   // Properties
-  createdAt DateTime
+  description String?
+  createdAt   DateTime
 }

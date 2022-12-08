@@ -1,15 +1,14 @@
-import { type NextPage } from "next";
-import { useRouter } from "next/router";
 import React from "react";
-import { Layout } from "../../components/Layout";
-import { trpc } from "../../utils/trpc";
+import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
-import { ResourceSummary } from "../../components/ResourceSummary";
-import { AuthGuard } from "../../components/AuthGuard";
 import Link from "next/link";
 
+import { Layout } from "../../components/Layout";
+import { trpc } from "../../utils/trpc";
+import { ResourceSummary } from "../../components/ResourceSummary";
+import { AuthGuard } from "../../components/AuthGuard";
+
 const Resources: NextPage = () => {
-  const router = useRouter();
   const { data: sessionData } = useSession();
 
   const userId = sessionData?.user?.id;

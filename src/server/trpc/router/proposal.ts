@@ -4,10 +4,15 @@ import { router, protectedProcedure } from "../trpc";
 
 export const proposalRouter = router({
   requestAccess: protectedProcedure
-    .input(z.string())
+    .input(
+      z.object({
+        resourceId: z.string(),
+        description: z.string().optional(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       const foundProposal = await ctx.prisma.proposal.findFirst({
-        where: { ownerId: ctx.session.user.id, resourceId: input },
+        where: { ownerId: ctx.session.user.id, resourceId: input.resourceId },
       });
 
       if (foundProposal !== null) {
@@ -17,7 +22,8 @@ export const proposalRouter = router({
       return ctx.prisma.proposal.create({
         data: {
           ownerId: ctx.session.user.id,
-          resourceId: input,
+          resourceId: input.resourceId,
+          description: input.description,
           createdAt: new Date(),
         },
       });

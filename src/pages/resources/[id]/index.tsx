@@ -16,12 +16,6 @@ const ResourceDetailed: NextPage = () => {
   const { data: sessionData } = useSession();
   const { data: resource } = trpc.resource.getById.useQuery(id as string);
 
-  const requestAccess = trpc.proposal.requestAccess.useMutation({
-    onSuccess: () => {
-      utils.resource.getById.invalidate();
-    },
-  });
-
   const unRequestAccess = trpc.proposal.unRequestAccess.useMutation({
     onSuccess: () => {
       utils.resource.getById.invalidate();
@@ -45,7 +39,10 @@ const ResourceDetailed: NextPage = () => {
         {resource?.proposals && (
           <ul>
             {resource.proposals.map((p) => (
-              <li>{p.owner.name}</li>
+              <li>
+                <p>{p.owner.name}</p>
+                <p>{p.description}</p>
+              </li>
             ))}
           </ul>
         )}
@@ -58,9 +55,9 @@ const ResourceDetailed: NextPage = () => {
                 Remove Request
               </Button>
             ) : (
-              <Button onClick={() => requestAccess.mutate(resource.id)}>
+              <Link href={`/resources/${resource.id}/create-request`}>
                 Request
-              </Button>
+              </Link>
             )}
             {resource.ownerId === sessionData?.user?.id && (
               <>
