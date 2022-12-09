@@ -9,10 +9,23 @@ interface MenuProps {
 export const Menu = ({ name, image }: MenuProps) => {
   const { data: sessionData } = useSession();
   return (
-    <div>
-      <p>{`Welcome, ${name}`}</p>
-      <img src={image} alt="Avatar" />
-      {sessionData && <Button onClick={() => signOut()}>Sign out</Button>}
+    <div className="my-8 mb-16 flex items-center justify-end lg:mb-24">
+      <div className="text-right leading-tight tracking-wide ">
+        <h2 className="text-gray-600">{`Welcome, ${name}`}</h2>
+        {sessionData && (
+          <Button
+            onClick={() => signOut()}
+            className="text-sm text-gray-400 underline"
+          >
+            Sign out
+          </Button>
+        )}
+      </div>
+      <img
+        src={image}
+        alt="Avatar"
+        className="ml-4 w-12 rounded-full brightness-100 contrast-100"
+      />
     </div>
   );
 };

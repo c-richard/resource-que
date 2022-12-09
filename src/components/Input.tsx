@@ -1,6 +1,5 @@
 import {
   UseFormRegister,
-  FieldValues,
   FieldError,
   FieldErrorsImpl,
   Merge,
@@ -14,13 +13,13 @@ interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
 
 export const Input = ({ name, error, register, ...props }: InputProps) => {
   return (
-    <label className="block">
+    <>
       <input
-        className="border-2 border-solid border-black"
+        className="mb-4 w-full bg-gray-200 px-6 py-4 tracking-wide placeholder-gray-600"
         {...props}
         {...register(name)}
       />
       {typeof error === "string" && <p>{error}</p>}
-    </label>
+    </>
   );
 };

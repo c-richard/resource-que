@@ -20,10 +20,8 @@ export function Layout({ title, children }: LayoutProps) {
         <meta name="description" content="Resource Queue" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        {name && image && <Menu name={name} image={image} />}
-        {children}
-      </main>
+      {name && image && <Menu name={name} image={image} />}
+      <main>{children}</main>
     </>
   );
 }

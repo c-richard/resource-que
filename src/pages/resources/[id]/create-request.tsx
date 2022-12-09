@@ -12,7 +12,7 @@ import { AuthGuard } from "../../../components/AuthGuard";
 import { Input } from "../../../components/Input";
 
 const createRequestSchema = z.object({
-  description: z.string().nullable(),
+  description: z.string().optional(),
 });
 
 const CreateRequest: NextPage = () => {
@@ -44,15 +44,23 @@ const CreateRequest: NextPage = () => {
 
   return (
     <AuthGuard>
-      <Layout title="Create Proposal">
-        <h1>Create Proposal</h1>
-        <form onSubmit={handleSubmit(onCreateRequest)}>
+      <Layout title="Request Resource">
+        <h1 className="mx-4 text-base tracking-wide tracking-wider text-gray-500">
+          Request Resource
+        </h1>
+        <form
+          onSubmit={handleSubmit(onCreateRequest)}
+          className="my-2 border-2 border-gray-200 bg-gray-100 p-8 px-6 shadow-md"
+        >
           <Input
             name="description"
             register={register}
             error={errors.name?.message}
+            placeholder="Why do you need this?"
           />
-          <Button type="submit">Create</Button>
+          <Button type="submit" variant="primary">
+            Request
+          </Button>
         </form>
       </Layout>
     </AuthGuard>

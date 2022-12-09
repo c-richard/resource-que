@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  @apply min-h-screen bg-gray-100;
+  display: grid;
+  place-items: flex-start center;
+}
+
+body {
+  @apply w-full max-w-lg px-4;
+}
