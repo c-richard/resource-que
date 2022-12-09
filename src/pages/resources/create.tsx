@@ -10,6 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Input } from "../../components/Input";
 import { AuthGuard } from "../../components/AuthGuard";
+import { Form } from "../../components/Form";
+import { Heading } from "../../components/Heading";
 
 const createResourceSchema = z.object({
   name: z.string().min(1, { message: "Required" }),
@@ -50,16 +52,24 @@ const CreateNewResource: NextPage = () => {
   return (
     <AuthGuard>
       <Layout title="Create">
-        <h1>Create New Resource</h1>
-        <form onSubmit={handleSubmit(onCreateResource)}>
-          <Input name="name" register={register} error={errors.name?.message} />
+        <Heading>Create New Resource</Heading>
+        <Form onSubmit={handleSubmit(onCreateResource)}>
+          <Input
+            name="name"
+            register={register}
+            error={errors.name?.message}
+            placeholder="Name"
+          />
           <Input
             name="description"
             register={register}
             error={errors.name?.message}
+            placeholder="Description"
           />
-          <Button type="submit">Create</Button>
-        </form>
+          <Button type="submit" variant="primary">
+            Create
+          </Button>
+        </Form>
       </Layout>
     </AuthGuard>
   );

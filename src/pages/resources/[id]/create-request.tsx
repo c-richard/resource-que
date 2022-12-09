@@ -10,6 +10,8 @@ import { trpc } from "../../../utils/trpc";
 import { Button } from "../../../components/Button";
 import { AuthGuard } from "../../../components/AuthGuard";
 import { Input } from "../../../components/Input";
+import { Form } from "../../../components/Form";
+import { Heading } from "../../../components/Heading";
 
 const createRequestSchema = z.object({
   description: z.string().optional(),
@@ -45,13 +47,8 @@ const CreateRequest: NextPage = () => {
   return (
     <AuthGuard>
       <Layout title="Request Resource">
-        <h1 className="mx-4 text-base tracking-wide tracking-wider text-gray-500">
-          Request Resource
-        </h1>
-        <form
-          onSubmit={handleSubmit(onCreateRequest)}
-          className="my-2 border-2 border-gray-200 bg-gray-100 p-8 px-6 shadow-md"
-        >
+        <Heading>Request Resource</Heading>
+        <Form onSubmit={handleSubmit(onCreateRequest)}>
           <Input
             name="description"
             register={register}
@@ -61,7 +58,7 @@ const CreateRequest: NextPage = () => {
           <Button type="submit" variant="primary">
             Request
           </Button>
-        </form>
+        </Form>
       </Layout>
     </AuthGuard>
   );

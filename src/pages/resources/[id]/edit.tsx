@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import * as z from "zod";
@@ -7,9 +8,10 @@ import * as z from "zod";
 import { Layout } from "../../../components/Layout";
 import { trpc } from "../../../utils/trpc";
 import { Button } from "../../../components/Button";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../../../components/Input";
 import { AuthGuard } from "../../../components/AuthGuard";
+import { Form } from "../../../components/Form";
+import { Heading } from "../../../components/Heading";
 
 const createResourceSchema = z.object({
   name: z.string().min(1, { message: "Required" }),
@@ -57,16 +59,24 @@ const ResourceEdit: NextPage = () => {
   return (
     <AuthGuard>
       <Layout title="Edit">
-        <h1>Edit Resource</h1>
-        <form onSubmit={handleSubmit(onEditResource)}>
-          <Input name="name" register={register} error={errors.name?.message} />
+        <Heading>Edit Resource</Heading>
+        <Form onSubmit={handleSubmit(onEditResource)}>
+          <Input
+            name="name"
+            register={register}
+            error={errors.name?.message}
+            placeholder="Name"
+          />
           <Input
             name="description"
             register={register}
             error={errors.name?.message}
+            placeholder="Description"
           />
-          <Button type="submit">Update</Button>
-        </form>
+          <Button type="submit" variant="primary">
+            Update
+          </Button>
+        </Form>
       </Layout>
     </AuthGuard>
   );
