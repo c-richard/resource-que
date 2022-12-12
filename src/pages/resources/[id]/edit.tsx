@@ -33,9 +33,9 @@ const ResourceEdit: NextPage = () => {
   });
 
   const editResource = trpc.resource.update.useMutation({
-    onSuccess: () => {
-      utils.resource.getByUserId.invalidate();
-      utils.resource.getById.invalidate();
+    onSuccess: async () => {
+      await utils.resource.getByUserId.invalidate();
+      await utils.resource.getById.invalidate();
       router.push(`/resources/${resource?.id}`);
     },
   });

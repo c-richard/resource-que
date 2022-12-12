@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 html {
-  @apply min-h-screen bg-gray-100;
+  @apply min-h-screen;
   display: grid;
   place-items: flex-start center;
 }
 
 body {
-  @apply w-full max-w-lg px-4;
+  @apply w-full max-w-lg bg-white px-4;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }

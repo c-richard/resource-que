@@ -4,10 +4,7 @@ interface FormProps extends React.ComponentPropsWithoutRef<"form"> {
 
 export function Form({ children, ...attributes }: FormProps) {
   return (
-    <form
-      className="my-2 border-2 border-gray-200 bg-gray-100 p-8 px-6 shadow-md"
-      {...attributes}
-    >
+    <form className="my-4" {...attributes}>
       {children}
     </form>
   );

@@ -1,15 +1,15 @@
 import { Resource } from "@prisma/client";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import { Link } from "../components/Link";
 
 export const ResourceSummary = (resource: Resource) => {
   const router = useRouter();
 
   return (
-    <div className="border-2 border-solid border-black">
-      <h2>{resource.name}</h2>
-      <p>{resource.description}</p>
-      <Link href={`/resources/${resource.id}`}>View</Link>
-    </div>
+    <Link variant="card" href={`/resources/${resource.id}`}>
+      <h2 className="text-lg uppercase text-slate-500">{resource.name}</h2>
+      {/* <p>{resource.description}</p> */}
+      {/* <Link href={`/resources/${resource.id}`}>View</Link> */}
+    </Link>
   );
 };

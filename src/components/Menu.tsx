@@ -11,11 +11,11 @@ export const Menu = ({ name, image }: MenuProps) => {
   return (
     <div className="my-8 mb-16 flex items-center justify-end lg:mb-24">
       <div className="text-right leading-tight tracking-wide ">
-        <h2 className="text-gray-600">{`Welcome, ${name}`}</h2>
+        <h2 className="text-slate-600">{`Welcome, ${name}`}</h2>
         {sessionData && (
           <Button
             onClick={() => signOut()}
-            className="text-sm text-gray-400 underline"
+            className="text-sm text-slate-400 underline"
           >
             Sign out
           </Button>
@@ -24,7 +24,7 @@ export const Menu = ({ name, image }: MenuProps) => {
       <img
         src={image}
         alt="Avatar"
-        className="ml-4 w-12 rounded-full brightness-100 contrast-100"
+        className="saturate-25 ml-4 w-12 rounded-full brightness-100 brightness-125"
       />
     </div>
   );

@@ -23,8 +23,8 @@ const CreateRequest: NextPage = () => {
   const utils = trpc.useContext();
 
   const requestAccess = trpc.proposal.requestAccess.useMutation({
-    onSuccess: () => {
-      utils.resource.getById.invalidate();
+    onSuccess: async () => {
+      await utils.resource.getById.invalidate();
       router.push(`/resources/${id}`);
     },
   });
@@ -53,7 +53,7 @@ const CreateRequest: NextPage = () => {
             name="description"
             register={register}
             error={errors.name?.message}
-            placeholder="Why do you need this?"
+            placeholder="What will you do with this resource?"
           />
           <Button type="submit" variant="primary">
             Request

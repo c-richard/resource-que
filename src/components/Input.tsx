@@ -15,7 +15,7 @@ export const Input = ({ name, error, register, ...props }: InputProps) => {
   return (
     <>
       <input
-        className="mb-4 w-full bg-gray-200 px-6 py-4 tracking-wide placeholder-gray-600"
+        className="mb-4 w-full bg-slate-100 px-6 py-4 tracking-wide text-slate-800 placeholder-slate-400"
         {...props}
         {...register(name)}
       />
